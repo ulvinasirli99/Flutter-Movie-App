@@ -39,4 +39,4 @@ Color purple = Colors.purple.shade200.withOpacity(0.6);
 Color amber = Colors.amber.withOpacity(0.5);
 
 
-Color orange = Colors.orange.withOpacity(0.5);
+Color orange = Colors.orange.shade400.withOpacity(0.8);

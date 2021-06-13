@@ -10,6 +10,7 @@ import 'package:tmdb_movie_app/routes/naviagtion_routes.dart';
 import 'package:tmdb_movie_app/screen/auth/login.dart';
 import 'package:tmdb_movie_app/screen/auth/register.dart';
 import 'package:tmdb_movie_app/screen/navigation/all_page_navigation.dart';
+import 'package:tmdb_movie_app/splash/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,7 +55,8 @@ class MyApp extends StatelessWidget {
         loginPage: (context) => LoginPage(),
         registerPage: (context) => RegisterPage(),
       },
-      home: AllPagesNavigation(),
+      home: SplashScreen(),
+      // home: AllPagesNavigation(),
     );
   }
 }
