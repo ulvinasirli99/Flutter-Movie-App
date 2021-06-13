@@ -14,12 +14,14 @@ List<String> imgList = [
 ];
 
 List<Widget> imageSliders = imgList
-    .map((item) => Container(
-          child: Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                child: Image.network(item, fit: BoxFit.cover)),
-          ),
-        ))
+    .map(
+      (item) => Container(
+        child: Container(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(12.0)),
+              child: Image.network(item, fit: BoxFit.cover)),
+        ),
+      ),
+    )
     .toList();

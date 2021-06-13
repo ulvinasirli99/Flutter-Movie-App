@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tmdb_movie_app/auth/profile_saver.dart';
+import 'package:tmdb_movie_app/screen/favorite/my_films.dart';
 import 'package:toast/toast.dart';
 
 class CustomProfileWidget extends StatefulWidget {
@@ -72,6 +73,27 @@ class _CustomProfileWidgetState extends State<CustomProfileWidget> {
       height: 120,
       child: Stack(
         children: [
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FavoritePage(),
+                    ),
+                  );
+                },
+                child: Icon(
+                  Icons.favorite,
+                  size: 45,
+                  color: Colors.redAccent,
+                ),
+              ),
+            ),
+          ),
           Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),

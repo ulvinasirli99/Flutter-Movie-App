@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tmdb_movie_app/provider/cSS_provider.dart';
+import 'package:tmdb_movie_app/provider/movie/cSS_provider.dart';
 import 'package:tmdb_movie_app/widgets/detail/writes_widget.dart';
 
 class WritesWidgetList extends StatefulWidget {

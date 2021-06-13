@@ -136,7 +136,7 @@ class _AccountPageState extends State<AccountPage> {
                 "Copyright All Rights Reserved",
                 style: TextStyle(
                   fontSize: 17,
-                  color: Colors.white.withOpacity(0.5),
+                  color: Colors.black.withOpacity(0.5),
                   fontWeight: FontWeight.w500,
                   fontStyle: FontStyle.italic,
                 ),

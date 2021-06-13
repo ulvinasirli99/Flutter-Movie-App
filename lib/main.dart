@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:tmdb_movie_app/auth/auth_session.dart';
-import 'package:tmdb_movie_app/provider/cSS_provider.dart';
-import 'package:tmdb_movie_app/provider/cS_provider.dart';
-import 'package:tmdb_movie_app/provider/mS_provider.dart';
-import 'package:tmdb_movie_app/provider/rS_providerr.dart';
+import 'package:tmdb_movie_app/provider/movie/cSS_provider.dart';
+import 'package:tmdb_movie_app/provider/movie/cS_provider.dart';
+import 'package:tmdb_movie_app/provider/movie/mS_provider.dart';
+import 'package:tmdb_movie_app/provider/movie/rS_providerr.dart';
+import 'package:tmdb_movie_app/provider/storage/check_stoarge.dart';
 import 'package:tmdb_movie_app/routes/naviagtion_routes.dart';
 import 'package:tmdb_movie_app/screen/auth/login.dart';
 import 'package:tmdb_movie_app/screen/auth/register.dart';
-import 'package:tmdb_movie_app/screen/home/popular.dart';
 import 'package:tmdb_movie_app/screen/navigation/all_page_navigation.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
@@ -34,6 +33,9 @@ List<SingleChildWidget> providers = [
   ),
   ChangeNotifierProvider<CastServiceProvider>(
     create: (_) => CastServiceProvider(),
+  ),
+  ChangeNotifierProvider<CheckStorageMovieItem>(
+    create: (_) => CheckStorageMovieItem(),
   ),
 ];
 

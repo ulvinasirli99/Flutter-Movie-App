@@ -71,30 +71,14 @@ class _HomeState extends State<Home>{
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VideoPage(),
-                        ),
-                      );
-                    },
-                    child: CustomCarouselDown(
-                      imagePath: "assets/hot.png",
-                    ),
+                  CustomCarouselDown(
+                    imagePath: "assets/hot.png",
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: CustomCarouselDown(
-                      imagePath: "assets/list.png",
-                    ),
+                  CustomCarouselDown(
+                    imagePath: "assets/list.png",
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: CustomCarouselDown(
-                      imagePath: "assets/sort.png",
-                    ),
+                  CustomCarouselDown(
+                    imagePath: "assets/sort.png",
                   ),
                 ],
               ),

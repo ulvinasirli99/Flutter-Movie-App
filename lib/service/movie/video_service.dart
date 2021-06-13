@@ -4,11 +4,11 @@ import 'package:tmdb_movie_app/model/movie/video_model.dart';
 
 class VideService {
   
-  Future<VideolModel> videosReady(int pageNum) async {
+  Future<VideolModel> videosReady(int filmID) async {
   
     final String url =
   
-        "https://api.themoviedb.org/3/movie/$pageNum/videos?api_key=82842c1d4249ecbe2d8ee39d7cb524c3&language=en-US";
+        "https://api.themoviedb.org/3/movie/$filmID/videos?api_key=82842c1d4249ecbe2d8ee39d7cb524c3&language=en-US";
 
     var req = await http.get(Uri.parse(url));
 

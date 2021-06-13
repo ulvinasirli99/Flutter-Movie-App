@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:better_player/better_player.dart';
+import 'package:tmdb_movie_app/screen/download/download_screen.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CustomVideowidget extends StatefulWidget {
   final String videoUrl;
   final String filmName;
+  final String moviIMGUrl;
 
   const CustomVideowidget({
     Key key,
     @required this.videoUrl,
     @required this.filmName,
+    @required this.moviIMGUrl,
   }) : super(key: key);
 
   @override
@@ -16,74 +19,97 @@ class CustomVideowidget extends StatefulWidget {
 }
 
 class _CustomVideowidgetState extends State<CustomVideowidget> {
-  BetterPlayerController _betterPlayerController;
+  YoutubePlayerController youtubePlayerController;
 
-  @override
-  void initState() {
-    super.initState();
-    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
-        BetterPlayerDataSourceType.network, widget.videoUrl);
-    _betterPlayerController = BetterPlayerController(
-      BetterPlayerConfiguration(
-        errorBuilder: (context, erMessage) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-        controlsConfiguration: BetterPlayerControlsConfiguration(
-          controlBarColor: Colors.green.withOpacity(0.6),
-          unMuteIcon: Icons.volume_off,
-          loadingColor: Colors.blue,
-        ),
+  void playTubePlayer() {
+    youtubePlayerController = YoutubePlayerController(
+      initialVideoId: widget.videoUrl,
+      flags: YoutubePlayerFlags(
+        enableCaption: false,
+        isLive: false,
+        autoPlay: false,
       ),
-      betterPlayerDataSource: betterPlayerDataSource,
     );
   }
 
   @override
+  void initState() {
+    playTubePlayer();
+    super.initState();
+  }
+
+  @override
+  void deactivate() {
+    youtubePlayerController.pause();
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
-    // TODO: implement dispose
-    _betterPlayerController.dispose();
+    youtubePlayerController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Size bSIze = MediaQuery.of(context).size;
-    return Container(
-      width: double.infinity,
-      height: bSIze.height * 0.38,
-        
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+    return YoutubePlayerBuilder(
+      player: YoutubePlayer(
+        controller: youtubePlayerController,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(top: 15),
-            width: double.infinity,
-            height: bSIze.height * 0.3,
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: BetterPlayer(
-                controller: _betterPlayerController,
+      builder: (context, player) {
+        return Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 30, top: 50),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DownloadScreen(
+                          movieUrl: widget.videoUrl,
+                          moviName: widget.filmName,
+                          movieImageUrl: widget.moviIMGUrl,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.download,
+                    size: 35,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.filmName,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-                fontWeight: FontWeight.w800,
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //Todo Player
+                  player,
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Text(
+                    widget.filmName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.redAccent.withOpacity(
+                        0.5,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          )
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 }

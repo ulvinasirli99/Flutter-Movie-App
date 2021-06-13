@@ -1,6 +1,30 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class BuyFilmWidget extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:tmdb_movie_app/payment/film_paid.dart';
+import 'package:tmdb_movie_app/screen/payment/payment_page.dart';
+
+class BuyFilmWidget extends StatefulWidget {
+  @override
+  _BuyFilmWidgetState createState() => _BuyFilmWidgetState();
+}
+
+class _BuyFilmWidgetState extends State<BuyFilmWidget> {
+  Random random = new Random();
+  String toSal = "";
+  String salaryV() {
+    double filmSalary =
+        moviePaidRandomGenerator(random.nextInt(random.nextInt(220)));
+    return filmSalary.toString();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    toSal = salaryV();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,7 +43,7 @@ class BuyFilmWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                "6.6",
+                salaryV(),
                 style: TextStyle(
                   fontSize: 35,
                   color: Colors.black,
@@ -36,7 +60,16 @@ class BuyFilmWidget extends StatelessWidget {
               overlayColor: MaterialStateProperty.all(Colors.green.shade600),
               backgroundColor: MaterialStateProperty.all(Colors.red),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PaymentPage(
+                    moviePrice: salaryV(),
+                  ),
+                ),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_movie_app/global/url/urls.dart';
-import 'package:tmdb_movie_app/provider/mS_provider.dart';
+import 'package:tmdb_movie_app/provider/movie/mS_provider.dart';
 import 'package:tmdb_movie_app/screen/detail/detail.dart';
 
 class NowShowListFilmWidget extends StatefulWidget {
