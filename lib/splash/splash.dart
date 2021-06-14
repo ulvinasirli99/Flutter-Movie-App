@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_movie_app/colors/app_color.dart';
-import 'package:tmdb_movie_app/mixin/splash_controller_mixin.dart';
+import 'package:tmdb_movie_app/intro/utils/intro_page.dart';
+import 'package:tmdb_movie_app/mixins/splash_controller_mixin.dart';
+import 'package:tmdb_movie_app/preferences/prefs.dart';
 import 'package:tmdb_movie_app/screen/auth/login.dart';
 import 'package:tmdb_movie_app/widgets/clip/splash_clip.dart';
 
@@ -10,20 +12,29 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> with SplashContoller {
+  SharedPrefs sharedPrefs = new SharedPrefs();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    timerDuartionNavigate(
-      () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginPage(),
-          ),
-        );
-      },
-    );
+    timerDuartionNavigate(() async {
+     bool value = await sharedPrefs.getIntroValueRead();
+    if (value == null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OnboardingScreen(),
+        ),
+      );
+    } else if (value == false) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ),
+      );
+    }
+    });
   }
 
   @override
@@ -49,8 +60,7 @@ class _SplashScreenState extends State<SplashScreen> with SplashContoller {
             margin: EdgeInsets.only(bottom: 30),
             child: CircularProgressIndicator(
               strokeWidth: 5,
-              valueColor:
-                  AlwaysStoppedAnimation<Color>(Colors.white),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),
             width: 35,
             height: 35,

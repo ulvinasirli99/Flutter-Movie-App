@@ -21,16 +21,15 @@ class _LoginPageState extends State<LoginPage> {
   SharedPreferences preferences;
   AuthService authService;
   AuthModel authModel;
+  String colorValueCheckUp = "";
   String userUID = "";
   String email = "";
   String pass = "";
   bool obscureText = true;
-  bool allDone = true;
   bool callProgress = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     authModel = new AuthModel();
     authService = new AuthService();
@@ -39,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    int chekColorValue = 1;
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white.withOpacity(1.0),
@@ -96,18 +96,23 @@ class _LoginPageState extends State<LoginPage> {
                           Padding(
                             padding: EdgeInsets.only(right: 15, left: 15),
                             child: TextFormField(
+                              autovalidateMode: AutovalidateMode.always,
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (value) {
                                 email = value;
                               },
                               controller: loginEmailController,
                               validator: (email) {
+                                validateEmail(email);
+                                colorValueCheckUp = email;
                                 return validateEmail(email);
                               },
                               decoration: InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.done,
-                                  color: Colors.green,
+                                  color: colorValueCheckUp == ""
+                                      ? Colors.grey
+                                      : Colors.green,
                                 ),
                                 prefixIcon: Icon(
                                   Icons.email,
@@ -299,19 +304,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   )
                 ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 15),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    size: 30,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
               ),
             ],
           ),

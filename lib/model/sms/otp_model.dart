@@ -7,7 +7,7 @@ class OtpModel {
   OtpModel.fromJson(Map<String, dynamic> json) {
     messageCount = json['message-count'];
     if (json['messages'] != null) {
-      messages = new List<Messages>();
+      messages = new List<Messages>.empty(growable: true);
       json['messages'].forEach((v) {
         messages.add(new Messages.fromJson(v));
       });

@@ -9,8 +9,8 @@ import 'package:tmdb_movie_app/provider/storage/check_stoarge.dart';
 import 'package:tmdb_movie_app/routes/naviagtion_routes.dart';
 import 'package:tmdb_movie_app/screen/auth/login.dart';
 import 'package:tmdb_movie_app/screen/auth/register.dart';
-import 'package:tmdb_movie_app/screen/navigation/all_page_navigation.dart';
 import 'package:tmdb_movie_app/splash/splash.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
