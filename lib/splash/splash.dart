@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb_movie_app/auth/auth_session.dart';
 import 'package:tmdb_movie_app/colors/app_color.dart';
 import 'package:tmdb_movie_app/intro/utils/intro_page.dart';
 import 'package:tmdb_movie_app/mixins/splash_controller_mixin.dart';
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> with SplashContoller {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginPage(),
+          builder: (context) => AuthSession(),
         ),
       );
     }

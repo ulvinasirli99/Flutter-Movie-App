@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:tmdb_movie_app/repository/repo.dart';
+import 'package:tmdb_movie_app/bloc/search_bloc.dart';
 import 'package:tmdb_movie_app/provider/movie/cSS_provider.dart';
 import 'package:tmdb_movie_app/provider/movie/cS_provider.dart';
 import 'package:tmdb_movie_app/provider/movie/mS_provider.dart';
@@ -9,8 +12,8 @@ import 'package:tmdb_movie_app/provider/storage/check_stoarge.dart';
 import 'package:tmdb_movie_app/routes/naviagtion_routes.dart';
 import 'package:tmdb_movie_app/screen/auth/login.dart';
 import 'package:tmdb_movie_app/screen/auth/register.dart';
+import 'package:tmdb_movie_app/screen/home/search.dart';
 import 'package:tmdb_movie_app/splash/splash.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,8 +58,11 @@ class MyApp extends StatelessWidget {
         loginPage: (context) => LoginPage(),
         registerPage: (context) => RegisterPage(),
       },
-      home: SplashScreen(),
-      // home: AllPagesNavigation(),
+      home: BlocProvider<SearchBloc>(
+        create: (context) => SearchBloc(repository: ApiRepository()),
+        child: SearchPage(),
+      ),
+      // home: SplashScreen(),
     );
   }
 }

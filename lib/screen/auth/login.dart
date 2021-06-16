@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tmdb_movie_app/controller/text_controller.dart';
+import 'package:tmdb_movie_app/mixins/connectivy_controller.dart';
 import 'package:tmdb_movie_app/model/auth/auth_model.dart';
 import 'package:tmdb_movie_app/routes/naviagtion_routes.dart';
 import 'package:tmdb_movie_app/screen/auth/reset_pass.dart';
@@ -38,7 +39,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    int chekColorValue = 1;
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white.withOpacity(1.0),

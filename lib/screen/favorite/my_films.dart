@@ -32,42 +32,46 @@ class _FavoritePageState extends State<FavoritePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<List<FavoriteModel>>(
-          future: futureFavoriteMovies(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (snapshot.data.length == 0) {
-              return Center(
-                child: Text(
-                  "No You isn't favorite movies",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.teal,
-                  ),
+        future: futureFavoriteMovies(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.data.length == 0) {
+            return Center(
+              child: Text(
+                "No You isn't favorite movies",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.teal,
                 ),
-              );
-            }
-            if (snapshot.data.length == null) {
-              return Center(
-                child: Text(
-                  "You isn't favorite movies",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.teal,
-                  ),
+              ),
+            );
+          }
+          if (snapshot.data.length == null) {
+            return Center(
+              child: Text(
+                "You isn't favorite movies",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.teal,
                 ),
-              );
-            }
-            return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                String movieImage = snapshot.data[index].movieImage == null
-                    ? "http://filmcasting.az/uploads/202006000635.jpg"
-                    : "${Urls.imageUrl}${snapshot.data[index].movieImage}";
-                return ListTile(
+              ),
+            );
+          }
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              String movieImage = snapshot.data[index].movieImage == null
+                  ? "http://filmcasting.az/uploads/202006000635.jpg"
+                  : "${Urls.imageUrl}${snapshot.data[index].movieImage}";
+              final item = snapshot.data[index];
+              return Dismissible(
+                background: Container(color: Colors.teal.shade300),
+                key: UniqueKey(),
+                child: ListTile(
                   contentPadding: EdgeInsets.all(12),
                   title: Text(
                     snapshot.data[index].movieName,
@@ -105,10 +109,21 @@ class _FavoritePageState extends State<FavoritePage> {
                       ),
                     ),
                   ),
-                );
-              },
-            );
-          }),
+                ),
+                onDismissed: (direction) {
+                  setState(() {
+                    deleteMovieItem(snapshot, index);
+                  });
+                },
+              );
+            },
+          );
+        },
+      ),
     );
+  }
+  void deleteMovieItem(
+      AsyncSnapshot<List<FavoriteModel>> snapshot, int index) async {
+    await DatabaseProvider().delete(snapshot.data[index].movieID);
   }
 }

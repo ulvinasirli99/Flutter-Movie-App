@@ -74,6 +74,8 @@ dependencies:
   rounded_loading_button: ^2.0.5
   permission_handler: ^8.0.1
   concentric_transition: ^1.0.1+1
+  connectivity_wrapper: ^1.0.6
+  bloc: ^7.0.0
 
 dev_dependencies:
   flutter_test:

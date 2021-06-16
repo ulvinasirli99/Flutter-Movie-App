@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tmdb_movie_app/colors/app_color.dart';
+import 'package:tmdb_movie_app/global/message/custom_toast.dart';
+import 'package:tmdb_movie_app/mixins/logout_controller.dart';
 import 'package:tmdb_movie_app/widgets/profile/custom_profile_widegt.dart';
 
 class AccountPage extends StatefulWidget {
@@ -8,7 +10,7 @@ class AccountPage extends StatefulWidget {
   _AccountPageState createState() => _AccountPageState();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _AccountPageState extends State<AccountPage> with LogoutMix {
   SharedPreferences sharedPreferences;
   int uid = 0;
   String id = "";
@@ -39,6 +41,22 @@ class _AccountPageState extends State<AccountPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomProfileWidget(),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: InkWell(
+                onTap: () {
+                  logoutAccount(context);
+                  CustomToast().customToast("Successfully performed.", context);
+                },
+                child: Icon(
+                  Icons.logout,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: Row(
