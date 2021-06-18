@@ -59,7 +59,6 @@ class _DetailPageState extends State<DetailPage> {
     var reviewCount = Provider.of<RServiceProvider>(context);
     var listMovieItem = Provider.of<CheckStorageMovieItem>(context);
     return Scaffold(
-      backgroundColor: Colors.white,
       body: FutureBuilder<DetailModel>(
         future: detailFuture,
         builder: (context, snapshot) {
@@ -206,7 +205,7 @@ class _DetailPageState extends State<DetailPage> {
                       child: Container(
                         width: double.infinity,
                         height: size.height * 0.18,
-                        color: Colors.white,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 90),
                           child: Column(

@@ -15,15 +15,23 @@ class SearchLoading extends SearchState {
 }
 
 class SearchLoaded extends SearchState {
+  
   final SearchModel model;
+  
   SearchLoaded(this.model);
+  
   @override
   List<Object> get props => [model];
+
 }
 
 class SearchError extends SearchState {
+ 
   final String errMsg;
+ 
   SearchError({@required this.errMsg});
+ 
   @override
   List<Object> get props => [errMsg];
+
 }

@@ -8,9 +8,9 @@ class ApiRepository {
   final searchService = new  SearchService();
  
  //Todo is SearchModel get Search service commint
-  Future<SearchModel> getAllMovieSearch() async {
+  Future<SearchModel> getAllMovieSearch(int pageNum, String movieName) async {
  
-    return await searchService.searchMovieResult();
+    return await searchService.searchMovieResult(pageNum,movieName);
  
   }
 
