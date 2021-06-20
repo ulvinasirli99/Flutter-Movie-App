@@ -6,7 +6,8 @@ import 'package:tmdb_movie_app/widgets/video/custom_video.dart';
 class VideoPage extends StatefulWidget {
   final int filmID;
   final String movieIMGUrl;
-  VideoPage({Key key, @required this.filmID, @required this.movieIMGUrl}) : super(key: key);
+  VideoPage({Key key, @required this.filmID, @required this.movieIMGUrl})
+      : super(key: key);
 
   @override
   _VideoPageState createState() => _VideoPageState();
@@ -26,6 +27,7 @@ class _VideoPageState extends State<VideoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green.shade200,
       body: FutureBuilder<VideolModel>(
         future: futureVideoModel,
         builder: (context, snapshot) {

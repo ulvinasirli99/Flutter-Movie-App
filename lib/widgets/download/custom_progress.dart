@@ -37,6 +37,12 @@ class _CustomProgressState extends State<CustomProgress> {
           min: 0,
           max: 100,
           initialValue: value,
+          onChange: (tap) {
+            setState(() {
+              value = tap;
+              print(value);
+            });
+          },
         ),
       ),
     );

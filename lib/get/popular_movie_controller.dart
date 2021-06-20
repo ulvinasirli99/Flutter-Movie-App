@@ -9,10 +9,8 @@ class PopularMovieController extends GetxController {
   PopularService service = PopularService();
  
   var movieList = List<Result>.empty(growable: false).obs;
- 
-  int number = 1;
 
- 
+ //Todo Initial Service for Start 
  Future<List<Result>> getMovieList(int pageNum) async {
  
     isLoading.value = true;
@@ -27,6 +25,7 @@ class PopularMovieController extends GetxController {
  
   }
 
+//Todo This Controller is  Next Page Data Service
  Future<List<Result>> nextGetMovieList(int pageNum) async {
  
     var result = await service.getPopularMovies(++pageNum);

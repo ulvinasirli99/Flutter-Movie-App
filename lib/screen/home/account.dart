@@ -36,8 +36,8 @@ class _AccountPageState extends State<AccountPage> with LogoutMix {
     userDetailFromMemeory();
   }
 
-  appThemeSave(bool isAppThemeMode){
-   //Todo....
+  appThemeSave(bool isAppThemeMode) {
+    //Todo....
   }
 
   @override
@@ -45,7 +45,8 @@ class _AccountPageState extends State<AccountPage> with LogoutMix {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (BuildContext context, state) {
         return Scaffold(
-          backgroundColor: state is ThemeLightState ? Colors.white : Colors.indigo.shade200,
+          backgroundColor:
+              state is ThemeLightState ? Colors.white : Colors.indigo.shade200,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

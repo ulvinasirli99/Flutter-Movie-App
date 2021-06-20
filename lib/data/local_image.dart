@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 List<String> imgList = [
   'https://www.slashgear.com/wp-content/uploads/2019/09/spider-man_main.jpg',
   'https://i.ytimg.com/vi/CpO4w3nb7zI/maxresdefault.jpg',
-  'https://iyiindir.com/wp-content/uploads/2021/04/11-8-640x318.jpg',
   'https://i.ytimg.com/vi/EFYEni2gsK0/maxresdefault.jpg',
   'https://s3.amazonaws.com/sfc-datebook-wordpress/wp-content/uploads/sites/2/2021/03/MER8bd0addd34810a3cd6593d67ac4c2_godzilla0331-1024x486.jpg',
   'https://i.ytimg.com/vi/5yd3Vf1t7Hc/maxresdefault.jpg',

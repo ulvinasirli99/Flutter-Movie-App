@@ -61,7 +61,6 @@ class _AllPagesNavigationState extends State<AllPagesNavigation>
               label: "Account",
             ),
           ],
-          backgroundColor: Colors.lightGreen.shade400.withOpacity(0.6),
           onTap: (state) {
             setState(() {
               bottomItemIndex = state;

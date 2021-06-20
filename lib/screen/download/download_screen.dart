@@ -1,8 +1,5 @@
-import 'dart:io';
 import 'dart:ui';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:tmdb_movie_app/global/url/urls.dart';
 import 'package:tmdb_movie_app/widgets/download/custom_progress.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -24,7 +21,7 @@ class DownloadScreen extends StatefulWidget {
 }
 
 class _DownloadScreenState extends State<DownloadScreen> {
-  double progress = 0;
+  double progress = 90;
   Permission permission;
   String movieFullUrl = "";
   String filmImage = "";
@@ -38,7 +35,6 @@ class _DownloadScreenState extends State<DownloadScreen> {
     movieFullUrl = "${Urls.yotubeVideoUrl}${widget.movieUrl}";
     print("Full video Url : $movieFullUrl");
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +73,6 @@ class _DownloadScreenState extends State<DownloadScreen> {
                         PermissionStatus status =
                             await Permission.storage.request();
                         if (status.isGranted) {
-                       
                         } else {
                           await Permission.storage.request();
                         }

@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tmdb_movie_app/dialog/alert/hot_disclamer.dart';
+import 'package:tmdb_movie_app/global/message/custom_toast.dart';
+import 'package:tmdb_movie_app/screen/heat/heat_page.dart';
 import 'package:tmdb_movie_app/screen/home/search.dart';
 import 'package:tmdb_movie_app/widgets/global/comming_list_films.dart';
 import 'package:tmdb_movie_app/widgets/global/nowshow_list_films.dart';
@@ -14,6 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  SharedPreferences preferences;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,14 +65,45 @@ class _HomeState extends State<Home> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomCarouselDown(
-                    imagePath: "assets/hot.png",
+                  GestureDetector(
+                    onTap: () async {
+                      preferences = await SharedPreferences.getInstance();
+                      if (preferences.getBool("isVlaidDisclamer") == true) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HeatPage(),
+                          ),
+                        );
+                      } else {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) {
+                            return Age18Disclamer();
+                          },
+                        );
+                      }
+                    },
+                    child: CustomCarouselDown(
+                      imagePath: "assets/hot.png",
+                    ),
                   ),
-                  CustomCarouselDown(
-                    imagePath: "assets/list.png",
+                  GestureDetector(
+                    onTap: () {
+                      CustomToast().customToast("Comming Soon", context);
+                    },
+                    child: CustomCarouselDown(
+                      imagePath: "assets/list.png",
+                    ),
                   ),
-                  CustomCarouselDown(
-                    imagePath: "assets/sort.png",
+                  GestureDetector(
+                    onTap: () {
+                      CustomToast().customToast("Comming Soon", context);
+                    },
+                    child: CustomCarouselDown(
+                      imagePath: "assets/sort.png",
+                    ),
                   ),
                 ],
               ),

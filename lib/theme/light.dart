@@ -5,6 +5,8 @@ class LightTheme{
   static ThemeData data = ThemeData(
   
       scaffoldBackgroundColor: Colors.white,
+
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: Colors.indigo.shade400,),
   
       primarySwatch: Colors.blue,
   

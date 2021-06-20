@@ -20,7 +20,6 @@ class _PopularMoviePageState extends State<PopularMoviePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     movieController.getMovieList(pageNum);
     scrollController.addListener(() {
@@ -39,6 +38,7 @@ class _PopularMoviePageState extends State<PopularMoviePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightGreen.shade200.withOpacity(0.6),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -117,7 +117,7 @@ class _PopularMoviePageState extends State<PopularMoviePage> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: purple,
+                                    color: Colors.teal,
                                   ),
                                 ),
                               ),
