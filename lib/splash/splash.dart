@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> with SplashContoller {
     // TODO: implement initState
     super.initState();
     timerDuartionNavigate(() async {
-     bool value = await sharedPrefs.getIntroValueRead();
+     bool? value = await sharedPrefs.getIntroValueRead();
     if (value == null) {
       Navigator.push(
         context,

@@ -3,11 +3,11 @@ import 'dart:math';
 int randomUID = Random().nextInt(5000);
 
 class AuthModel {
-  String uid;
-  String userName;
-  String photoUrl;
-  String email;
-  String phone;
+  String ?uid;
+  String? userName;
+  String? photoUrl;
+  String? email;
+  String? phone;
 
   AuthModel({
     this.uid,

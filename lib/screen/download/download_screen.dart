@@ -10,10 +10,10 @@ class DownloadScreen extends StatefulWidget {
   final String moviName;
 
   DownloadScreen({
-    Key key,
-    @required this.movieUrl,
-    @required this.moviName,
-    @required this.movieImageUrl,
+    Key? key,
+    required this.movieUrl,
+    required this.moviName,
+    required this.movieImageUrl,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class DownloadScreen extends StatefulWidget {
 
 class _DownloadScreenState extends State<DownloadScreen> {
   double progress = 90;
-  Permission permission;
+  Permission? permission;
   String movieFullUrl = "";
   String filmImage = "";
 

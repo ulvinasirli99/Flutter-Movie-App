@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tmdb_movie_app/model/intro/page_data.dart';
 
 class PageCard extends StatelessWidget {
-  final PageData page;
+  final PageData? page;
 
   const PageCard({
-    Key key,
+    Key? key,
    this.page,
   }) : super(key: key);
 
@@ -28,7 +28,7 @@ class PageCard extends StatelessWidget {
 
   Widget _buildText(BuildContext context) {
     return Text(
-      page.title,
+      page!.title!,
       style: Theme.of(context).textTheme.headline6,
       textAlign: TextAlign.center,
     );
@@ -44,10 +44,10 @@ class PageCard extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(60.0)),
-        color: page.bgColor
+        color: page!.bgColor!
 //            .withBlue(page.bgColor.blue - 40)
-            .withGreen(page.bgColor.green + 20)
-            .withRed(page.bgColor.red - 100)
+            .withGreen(page!.bgColor!.green + 20)
+            .withRed(page!.bgColor!.red - 100)
             .withAlpha(90),
       ),
       margin: EdgeInsets.only(
@@ -60,10 +60,10 @@ class PageCard extends StatelessWidget {
             child: RotatedBox(
               quarterTurns: 2,
               child: Icon(
-                page.icon,
+                page!.icon,
                 size: iconSize + 20,
-                color: page.bgColor
-                    .withBlue(page.bgColor.blue - 10)
+                color: page!.bgColor!
+                    .withBlue(page!.bgColor!.blue - 10)
                     .withGreen(220),
               ),
             ),
@@ -74,16 +74,16 @@ class PageCard extends StatelessWidget {
             child: RotatedBox(
               quarterTurns: 5,
               child: Icon(
-                page.icon,
+                page!.icon,
                 size: iconSize + 20,
-                color: page.bgColor.withGreen(66).withRed(77),
+                color: page!.bgColor!.withGreen(66).withRed(77),
               ),
             ),
           ),
           Icon(
-            page.icon,
+            page!.icon,
             size: iconSize,
-            color: page.bgColor.withRed(111).withGreen(220),
+            color: page!.bgColor!.withRed(111).withGreen(220),
           ),
         ],
       ),

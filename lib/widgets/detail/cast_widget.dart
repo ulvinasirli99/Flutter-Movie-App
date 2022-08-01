@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tmdb_movie_app/global/url/urls.dart';
 
 class CastWidget extends StatelessWidget {
-  final String castImgUrl;
-  final String castName;
+  final String?castImgUrl;
+  final String?castName;
 
-  const CastWidget({Key key, this.castImgUrl, this.castName}) : super(key: key);
+  const CastWidget({Key? key, this.castImgUrl, this.castName}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +36,7 @@ class CastWidget extends StatelessWidget {
             height: 5,
           ),
           Text(
-            castName.substring(0, 5),
+            castName!.substring(0, 5),
             style: TextStyle(
               fontSize: 17,
               color: Colors.grey.shade500,

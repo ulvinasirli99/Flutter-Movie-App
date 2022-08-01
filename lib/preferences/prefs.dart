@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
   
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
   
   Future<bool> setIntroValueWrite(bool valueKey) async {
   
@@ -12,11 +12,11 @@ class SharedPrefs {
   
   }
 
-  Future<bool> getIntroValueRead() async {
+  Future<bool?> getIntroValueRead() async {
   
     sharedPreferences = await SharedPreferences.getInstance();
   
-    return sharedPreferences.getBool("introValue");
+    return sharedPreferences.getBool("introValue") ?? null;
   
   }
 

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class FilmRoundImage extends StatelessWidget {
-  final String orginalTitle;
-  final String releaseDateTime;
-  final int voteAverage;
-  final String voteCount;
-  final String populuartyValue;
-  final String movieUrl;
+  final String?orginalTitle;
+  final String?releaseDateTime;
+  final int? voteAverage;
+  final String? voteCount;
+  final String? populuartyValue;
+  final String? movieUrl;
 
   FilmRoundImage({
-    Key key,
+    Key? key,
     @required this.orginalTitle,
     @required this.releaseDateTime,
     this.voteAverage,
@@ -31,7 +31,7 @@ class FilmRoundImage extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: NetworkImage(movieUrl),
+              image: NetworkImage(movieUrl!),
             ),
           ),
         ),
@@ -49,7 +49,7 @@ class FilmRoundImage extends StatelessWidget {
                     left: 7,
                   ),
                   child: Text(
-                    orginalTitle,
+                    orginalTitle!,
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w500,

@@ -4,9 +4,9 @@ import 'package:tmdb_movie_app/provider/movie/cSS_provider.dart';
 import 'package:tmdb_movie_app/widgets/detail/cast_widget.dart';
 
 class MovieCastsWidget extends StatefulWidget {
-  final int filmID;
+  final int? filmID;
 
-  MovieCastsWidget({Key key, this.filmID}) : super(key: key);
+  MovieCastsWidget({Key? key, this.filmID}) : super(key: key);
   @override
   _MovieCastsWidgetState createState() => _MovieCastsWidgetState();
 }
@@ -14,10 +14,9 @@ class MovieCastsWidget extends StatefulWidget {
 class _MovieCastsWidgetState extends State<MovieCastsWidget> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     var castItems = Provider.of<CastServiceProvider>(context, listen: false);
-    castItems.getCasts(widget.filmID);
+    castItems.getCasts(widget.filmID!);
   }
 
   @override
@@ -33,11 +32,11 @@ class _MovieCastsWidgetState extends State<MovieCastsWidget> {
           )
         : ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: castItem.castModel.cast.length,
+            itemCount: castItem.castModel!.cast!.length,
             itemBuilder: (context, index) {
               return CastWidget(
-                castImgUrl: castItem.castModel.cast[index].profilePath,
-                castName: castItem.castModel.cast[index].name,
+                castImgUrl: castItem.castModel!.cast![index].profilePath,
+                castName: castItem.castModel!.cast![index].name,
               );
             },
           );

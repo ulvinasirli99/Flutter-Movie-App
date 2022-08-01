@@ -14,7 +14,7 @@ class ProfileSaver {
     return await prefs.setString(IMAGE_KEY, value);
   }
 
-  static Future<String> loadImageFromPrefs() async {
+  static Future<String?> loadImageFromPrefs() async {
   
     SharedPreferences prefs = await SharedPreferences.getInstance();
   

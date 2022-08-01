@@ -5,9 +5,9 @@ class MovieCard extends StatelessWidget {
   final String movieBackrdopPath;
 
   MovieCard({
-    Key key,
-    @required this.movieName,
-    @required this.movieBackrdopPath,
+    Key? key,
+    required this.movieName,
+    required this.movieBackrdopPath,
   }) : super(key: key);
 
   @override

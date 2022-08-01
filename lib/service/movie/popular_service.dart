@@ -15,7 +15,7 @@ class PopularService {
 
     if (req.statusCode == 200) {
  
-      List<Result> dataResult = PopularModel.fromJson(res).results;
+      List<Result> dataResult = PopularModel.fromJson(res).results!;
 
       return dataResult;
  

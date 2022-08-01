@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tmdb_movie_app/controller/text_controller.dart';
 import 'package:tmdb_movie_app/dialog/alert/disclamer_dialog.dart';
 import 'package:tmdb_movie_app/global/keys/global_keys.dart';
-import 'package:toast/toast.dart';
 import 'package:twilio_flutter/twilio_flutter.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -16,8 +16,8 @@ class _ResetPasswordState extends State<ResetPassword> {
   String number = "";
   String personInfo = "";
   bool callProgress = false;
-  SharedPreferences preferences;
-  TwilioFlutter twilioFlutter;
+  late SharedPreferences preferences;
+  late TwilioFlutter twilioFlutter;
 
   @override
   void initState() {
@@ -62,10 +62,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                   keyboardType: TextInputType.phone,
                   controller: resetPasswordController,
                   onSaved: (value) {
-                    number = value;
+                    number = value!;
                   },
                   validator: (pref) {
-                    if (pref.length < 6) {
+                    if (pref!.length < 6) {
                       return "Your number isn't correct";
                     }
                   },
@@ -85,7 +85,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         );
                       },
                     ),
-                    hintText: "Please enter your [+994504197263]",
+                    hintText: "Please enter your [+994-00-000-00-00]",
                     hintStyle: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -108,14 +108,14 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    if (resetPasswordPageFormKey.currentState.validate()) {
+                    if (resetPasswordPageFormKey.currentState!.validate()) {
                       preferences = await SharedPreferences.getInstance();
                       setState(() {
                         callProgress = true;
                       });
-                      String name = preferences.getString("ad");
-                      String email = preferences.getString("posta");
-                      String pass = preferences.getString("parol");
+                      String name = preferences.getString("ad")!;
+                      String email = preferences.getString("posta")!;
+                      String pass = preferences.getString("parol")!;
                       String message =
                           "\n Name : $name \n Email : $email \n Password : $pass";
                       try {
@@ -127,11 +127,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                       setState(() {
                         callProgress = false;
                       });
-                      Toast.show(
-                        "Detail send Succusfluy",
-                        context,
-                        duration: 3,
-                        textColor: Colors.white,
+
+                      Fluttertoast.showToast(
+                        msg: "Detail send Succusfluy",
+                        toastLength: Toast.LENGTH_LONG,
+                        textColor: Colors.teal,
                         backgroundColor: Colors.black,
                       );
                     }

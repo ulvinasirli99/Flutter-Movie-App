@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tmdb_movie_app/auth/profile_saver.dart';
 import 'package:tmdb_movie_app/screen/favorite/my_films.dart';
-import 'package:toast/toast.dart';
 
 class CustomProfileWidget extends StatefulWidget {
   @override
@@ -11,9 +11,9 @@ class CustomProfileWidget extends StatefulWidget {
 }
 
 class _CustomProfileWidgetState extends State<CustomProfileWidget> {
-  File _image;
+  late File? _image;
   final picker = ImagePicker();
-  Image image;
+  Image? image;
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -22,17 +22,16 @@ class _CustomProfileWidgetState extends State<CustomProfileWidget> {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
         image = Image.memory(
-          _image.readAsBytesSync(),
+          _image!.readAsBytesSync(),
           width: 90,
           height: 90,
           fit: BoxFit.cover,
         );
       } else {
-        Toast.show(
-          "No image selected",
-          context,
-          duration: 2,
-          textColor: Colors.white,
+        Fluttertoast.showToast(
+          msg: "No image selected",
+          toastLength: Toast.LENGTH_LONG,
+          textColor: Colors.teal,
           backgroundColor: Colors.black,
         );
       }
@@ -41,7 +40,7 @@ class _CustomProfileWidgetState extends State<CustomProfileWidget> {
 
   Future imageSaveMemory() async {
     setState(() {
-      var file = ProfileSaver.base64String(_image.readAsBytesSync());
+      var file = ProfileSaver.base64String(_image!.readAsBytesSync());
       ProfileSaver.saveImageToPrefs(file);
     });
   }
@@ -49,14 +48,13 @@ class _CustomProfileWidgetState extends State<CustomProfileWidget> {
   Future imageLoadFromMemory() async {
     ProfileSaver.loadImageFromPrefs().then((value) {
       setState(() {
-        image = ProfileSaver.imageFrom64BaseString(value);
+        image = ProfileSaver.imageFrom64BaseString(value!);
       });
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       imageLoadFromMemory();
@@ -97,6 +95,7 @@ class _CustomProfileWidgetState extends State<CustomProfileWidget> {
           Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
+              // ignore: unnecessary_null_comparison
               child: image == null
                   ? Image.asset(
                       'assets/loading.gif',
@@ -108,7 +107,7 @@ class _CustomProfileWidgetState extends State<CustomProfileWidget> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         image: DecorationImage(
-                          image: image.image,
+                          image: image!.image,
                           fit: BoxFit.cover,
                         ),
                       ),

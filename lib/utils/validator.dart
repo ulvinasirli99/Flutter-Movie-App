@@ -1,4 +1,4 @@
-String validateName(String value) {
+String? validateName(String value) {
   String pattern = r'(^[a-zA-Z ]*$)';
   RegExp regExp = new RegExp(pattern);
   if (value.length == 0) {
@@ -9,7 +9,7 @@ String validateName(String value) {
   return null;
 }
 
-String validatePasswordLength(String value) {
+String? validatePasswordLength(String value) {
   if (value.length == 0) {
     return "Password can't be empty";
   } else if (value.length <= 6) {
@@ -18,7 +18,7 @@ String validatePasswordLength(String value) {
   return null;
 }
 
-String validateEmail(String value) {
+String? validateEmail(String value) {
   String pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regExp = new RegExp(pattern);

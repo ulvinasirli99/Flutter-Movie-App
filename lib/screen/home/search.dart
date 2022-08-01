@@ -40,7 +40,7 @@ class _SearchPageState extends State<SearchPage> {
           builder: (BuildContext context, SearchState state) {
             if (state is SearchError) {
               return Center(
-                child: Text(state.errMsg),
+                child: Text(state.errMsg!),
               );
             }
             if (state is SearchLoading) {
@@ -83,7 +83,7 @@ class _SearchPageState extends State<SearchPage> {
                                   movieName = value;
                                 },
                                 onSaved: (value) {
-                                  movieName = value;
+                                  movieName = value!;
                                 },
                               ),
                             ),
@@ -92,14 +92,14 @@ class _SearchPageState extends State<SearchPage> {
                             padding: const EdgeInsets.only(left: 12),
                             child: InkWell(
                               onTap: () {
-                                if (searcFormKey.currentState.validate()) {
+                                if (searcFormKey.currentState!.validate()) {
                                   setState(() {
                                     context.read<SearchBloc>()
                                       ..add(
                                           FetchSearchMovie(pageNum, movieName));
                                   });
                                   print(movieName);
-                                  currentFocus.focusedChild.unfocus();
+                                  currentFocus.focusedChild!.unfocus();
                                   searchTextController.clear();
                                 }
                               },
@@ -114,7 +114,7 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: model.results.length,
+                        itemCount: model.results!.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
@@ -122,18 +122,18 @@ class _SearchPageState extends State<SearchPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => DetailPage(
-                                    filmUID: model.results[index].id,
+                                    filmUID: model.results![index].id!,
                                   ),
                                 ),
                               );
                             },
                             child: MovieCard(
                               movieBackrdopPath: model
-                                          .results[index].backdropPath ==
+                                          .results![index].backdropPath ==
                                       null
                                   ? Urls.ifFilmImageNull
-                                  : "${Urls.imageUrl}${model.results[index].backdropPath}",
-                              movieName: model.results[index].title,
+                                  : "${Urls.imageUrl}${model.results![index].backdropPath}",
+                              movieName: model.results![index].title!,
                             ),
                           );
                         },

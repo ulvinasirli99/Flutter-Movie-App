@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:tmdb_movie_app/payment/film_paid.dart';
@@ -9,7 +8,7 @@ import 'package:tmdb_movie_app/widgets/payment/payment_fields.dart';
 class PaymentPage extends StatefulWidget {
   final String moviePrice;
 
-   PaymentPage({Key key, this.moviePrice}) : super(key: key);
+  PaymentPage({Key? key, required this.moviePrice}) : super(key: key);
   @override
   _PaymentPageState createState() => _PaymentPageState();
 }

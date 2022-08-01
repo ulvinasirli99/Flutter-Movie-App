@@ -6,7 +6,7 @@ import 'package:tmdb_movie_app/enum/app_theme.dart';
 //Todo Only App Theme Switch Saver
 class Prefs {
 
-  static SharedPreferences preferences;
+  static late SharedPreferences preferences;
 
   static const String KEY_SELECTED_THEME = 'key_selected_theme';
 
@@ -24,15 +24,16 @@ class Prefs {
   }
 
 //Todo AppTheme in App Initalize 
-  static AppTheme getTheme() {
-    String theme = preferences.getString(KEY_SELECTED_THEME);
+  static AppTheme? getTheme() {
+    String? theme = preferences.getString(KEY_SELECTED_THEME);
+    // ignore: unnecessary_null_comparison
     if (null == theme) {
       return AppTheme.lightTheme;
     }
     return getThemeFromString(jsonDecode(theme));
   }
 
-  static AppTheme getThemeFromString(String themeString) {
+  static AppTheme? getThemeFromString(String themeString) {
     for (AppTheme theme in AppTheme.values) {
       if (theme.toString() == themeString) {
         return theme;

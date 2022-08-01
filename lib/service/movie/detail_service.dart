@@ -5,7 +5,7 @@ import 'package:tmdb_movie_app/model/movie/detail_model.dart';
 class FilmDetailService {
 
   //Todo Detail Service for Film
-  Future<DetailModel> getFilmDetail(int filmUID) async {
+  Future<DetailModel?> getFilmDetail(int filmUID) async {
  
     var response = await http.get(Uri.parse(
  

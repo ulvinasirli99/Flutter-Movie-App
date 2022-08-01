@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_movie_app/database/movie_db.dart';
 import 'package:tmdb_movie_app/global/count/global_counts.dart';
@@ -18,12 +19,11 @@ import 'package:tmdb_movie_app/widgets/detail/movie_cast_list.dart';
 import 'package:tmdb_movie_app/widgets/detail/movie_photos_list.dart';
 import 'package:tmdb_movie_app/widgets/detail/txt_i.dart';
 import 'package:tmdb_movie_app/widgets/detail/writes_widget_list.dart';
-import 'package:toast/toast.dart';
 
 class DetailPage extends StatefulWidget {
-  final int filmUID;
+  final int? filmUID;
 
-  const DetailPage({Key key, this.filmUID}) : super(key: key);
+  const DetailPage({Key? key, this.filmUID}) : super(key: key);
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -32,25 +32,22 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   int currentINdex = 0;
   FileShare share = new FileShare();
-  Future<DetailModel> detailFuture;
-  Future<ReviewModel> getReviews;
-  FilmDetailService detailService = new FilmDetailService();
-
-  ///Todo Diqqet filmin ayritilarinda
-  ///Todo Bacdrop image null ola biler ve bunun ucun gelen datani yoxla gonder
+  late Future<DetailModel?> detailFuture;
+  late Future<ReviewModel?> getReviews;
+  late FilmDetailService? detailService = new FilmDetailService();
 
   @override
   void initState() {
     super.initState();
     //Todo Detail service statrted......
-    detailFuture = detailService.getFilmDetail(widget.filmUID);
+    detailFuture = detailService!.getFilmDetail(widget.filmUID!);
     //Todo Review Provider Management
     var reviewCount = Provider.of<RServiceProvider>(context, listen: false);
-    reviewCount.getReviewCount(widget.filmUID);
+    reviewCount.getReviewCount(widget.filmUID!);
     //Todo Check MovieItem in Srorage.......
     var chekMovieItem =
         Provider.of<CheckStorageMovieItem>(context, listen: false);
-    chekMovieItem.checkMovieDbItem(widget.filmUID);
+    chekMovieItem.checkMovieDbItem(widget.filmUID!);
   }
 
   @override
@@ -59,9 +56,9 @@ class _DetailPageState extends State<DetailPage> {
     var reviewCount = Provider.of<RServiceProvider>(context);
     var listMovieItem = Provider.of<CheckStorageMovieItem>(context);
     return Scaffold(
-      body: FutureBuilder<DetailModel>(
+      body: FutureBuilder<DetailModel?>(
         future: detailFuture,
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot<DetailModel?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
@@ -79,9 +76,9 @@ class _DetailPageState extends State<DetailPage> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      snapshot.data.backdropPath == null
+                      snapshot.data!.backdropPath == null
                           ? Urls.ifFilmImageNull
-                          : "${Urls.imageUrl}${snapshot.data.backdropPath}",
+                          : "${Urls.imageUrl}${snapshot.data!.backdropPath}",
                     ),
                   ),
                 ),
@@ -115,33 +112,51 @@ class _DetailPageState extends State<DetailPage> {
                               var result = await DatabaseProvider().insert(
                                 FavoriteModel(
                                   movieID: int.tryParse(
-                                    snapshot.data.id.toString(),
+                                    snapshot.data!.id.toString(),
                                   ),
-                                  movieName: snapshot.data.title,
-                                  movieImage: snapshot.data.backdropPath,
-                                  movieType: snapshot.data.tagline,
+                                  movieName: snapshot.data!.title,
+                                  movieImage: snapshot.data!.backdropPath,
+                                  movieType: snapshot.data!.tagline,
                                 ),
                               );
                               setState(() {
                                 listMovieItem.isFavorited = true;
                               });
                               if (result > 0) {
-                                return Toast.show("Add to Favorite", context);
+                                Fluttertoast.showToast(
+                                  msg: "Add to Favorite",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  textColor: Colors.teal,
+                                  backgroundColor: Colors.black,
+                                );
                               } else {
-                                return Toast.show("Error...", context);
+                                Fluttertoast.showToast(
+                                  msg: "Error",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  textColor: Colors.teal,
+                                  backgroundColor: Colors.black,
+                                );
                               }
                             } else {
                               var result = await DatabaseProvider()
-                                  .delete(snapshot.data.id);
+                                  .delete(snapshot.data!.id!);
                               setState(() {
                                 listMovieItem.isFavorited = false;
                               });
                               if (result > 0) {
-                                return Toast.show(
-                                    "Delete from Favorite", context);
+                                Fluttertoast.showToast(
+                                  msg: "Delete from Favorite",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  textColor: Colors.teal,
+                                  backgroundColor: Colors.black,
+                                );
                               } else {
-                                return Toast.show(
-                                    "Error delete item...", context);
+                                Fluttertoast.showToast(
+                                  msg: "Error delete item...",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  textColor: Colors.teal,
+                                  backgroundColor: Colors.black,
+                                );
                               }
                             }
                           },
@@ -166,7 +181,7 @@ class _DetailPageState extends State<DetailPage> {
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            share.shareFilmUrl(snapshot.data.title);
+                            share.shareFilmUrl(snapshot.data!.title!);
                           },
                         ),
                       ),
@@ -184,10 +199,10 @@ class _DetailPageState extends State<DetailPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => VideoPage(
-                                  filmID: snapshot.data.id,
-                                  movieIMGUrl: snapshot.data.posterPath == null
+                                  filmID: snapshot.data!.id!,
+                                  movieIMGUrl: snapshot.data!.posterPath == null
                                       ? "https://brocku.ca/social-sciences/cpcf/wp-content/uploads/sites/150/Films-Hero-1260x600.jpg"
-                                      : snapshot.data.posterPath,
+                                      : snapshot.data!.posterPath!,
                                 ),
                               ),
                             );
@@ -224,7 +239,7 @@ class _DetailPageState extends State<DetailPage> {
                                     child: Container(
                                       width: 140,
                                       child: Text(
-                                        snapshot.data.originalTitle,
+                                        snapshot.data!.originalTitle!,
                                         overflow: TextOverflow.fade,
                                         maxLines: 1,
                                         softWrap: false,
@@ -246,7 +261,7 @@ class _DetailPageState extends State<DetailPage> {
                                           minRating: 1.0,
                                           itemCount: 5,
                                           initialRating:
-                                              ratingCount(snapshot).toDouble(),
+                                              ratingCount(snapshot)!.toDouble(),
                                           direction: Axis.horizontal,
                                           allowHalfRating: true,
                                           itemSize: 14.0,
@@ -255,7 +270,7 @@ class _DetailPageState extends State<DetailPage> {
                                             color: Colors.yellow,
                                           ),
                                           onRatingUpdate: (rating) {
-                                            rating = ratingCount(snapshot)
+                                            rating = ratingCount(snapshot)!
                                                 .toDouble();
                                           },
                                         ),
@@ -263,7 +278,7 @@ class _DetailPageState extends State<DetailPage> {
                                           width: 5,
                                         ),
                                         Text(
-                                          snapshot.data.voteAverage.toString(),
+                                          snapshot.data!.voteAverage.toString(),
                                           style: TextStyle(
                                             fontSize: 20,
                                             color: Colors.pinkAccent.shade400,
@@ -281,7 +296,7 @@ class _DetailPageState extends State<DetailPage> {
                                   left: 15,
                                 ),
                                 child: Text(
-                                  "${snapshot.data.genres[0].name}",
+                                  "${snapshot.data!.genres![0].name}",
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -300,7 +315,7 @@ class _DetailPageState extends State<DetailPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     TxtI(Icons.remove_red_eye,
-                                        snapshot.data.popularity.toString()),
+                                        snapshot.data!.popularity.toString()),
                                     SizedBox(
                                       width: 5,
                                     ),
@@ -308,14 +323,14 @@ class _DetailPageState extends State<DetailPage> {
                                       Icons.mail,
                                       reviewCount.loading
                                           ? "0"
-                                          : "${reviewCount.reviewModel.results.length.toString()}",
+                                          : "${reviewCount.reviewModel!.results!.length.toString()}",
                                     ),
                                     SizedBox(
                                       width: 5,
                                     ),
                                     TxtI(
                                       Icons.lock_clock,
-                                      getTimeString(snapshot.data.runtime) +
+                                      getTimeString(snapshot.data!.runtime!) +
                                           " min",
                                     ),
                                   ],
@@ -331,9 +346,9 @@ class _DetailPageState extends State<DetailPage> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 120, left: 10),
                         child: FilmImageWidget(
-                          snapshot.data.backdropPath == null
+                          snapshot.data!.backdropPath == null
                               ? "${Urls.ifFilmImageNull}"
-                              : "${Urls.imageUrl}${snapshot.data.backdropPath}",
+                              : "${Urls.imageUrl}${snapshot.data!.backdropPath}",
                         ),
                       ),
                     ),
@@ -362,9 +377,9 @@ class _DetailPageState extends State<DetailPage> {
                         height: 5,
                       ),
                       Text(
-                        snapshot.data.overview == ""
+                        snapshot.data!.overview == ""
                             ? "There is no description of this film."
-                            : '''${snapshot.data.overview}''',
+                            : '''${snapshot.data!.overview}''',
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 14,
@@ -417,14 +432,14 @@ class _DetailPageState extends State<DetailPage> {
                 height: 135,
                 child: currentINdex == 0
                     ? MovieCastsWidget(
-                        filmID: snapshot.data.id,
+                        filmID: snapshot.data!.id,
                       )
                     : currentINdex == 1
                         ? MoviePhotosList(
-                            filmID: snapshot.data.id,
+                            filmID: snapshot.data!.id,
                           )
                         : WritesWidgetList(
-                            id: snapshot.data.id,
+                            id: snapshot.data!.id,
                           ),
               ),
               Spacer(),
@@ -436,44 +451,3 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 }
-
-/*
-
-ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            elevation: MaterialStateProperty.all(0),
-                          ),
-                          onPressed: () async {
-                            // var result = await DatabaseProvider()
-                            //     .favoriteHasData(
-                            //         int.tryParse(snapshot.data.id.toString()));
-                            // if (result == false) {
-                            //   return Toast.show("False", context);
-                            // } else {
-                            //   return Toast.show("True", context);
-                            // }
-                            var result = await DatabaseProvider().insert(
-                              FavoriteModel(
-                                movieID: int.tryParse(
-                                  snapshot.data.id.toString(),
-                                ),
-                                movieName: snapshot.data.title,
-                                movieImage: snapshot.data.backdropPath,
-                                movieType: snapshot.data.tagline,
-                              ),
-                            );
-                            if (result > 0) {
-                              return Toast.show("Add to Favorite", context);
-                            } else {
-                              return Toast.show("Error add", context);
-                            }
-                          },
-                          child: Icon(
-                            Icons.favorite,
-                            size: 45,
-                          ),
-                        ),
-
-*/

@@ -16,10 +16,10 @@ class HeatModel {
         this.totalResults,
     });
 
-    int page;
-    List<Result> results;
-    int totalPages;
-    int totalResults;
+    int? page;
+    List<Result> ?results;
+    int? totalPages;
+    int? totalResults;
 
     factory HeatModel.fromJson(Map<String, dynamic> json) => HeatModel(
         page: json["page"],
@@ -30,7 +30,7 @@ class HeatModel {
 
     Map<String, dynamic> toJson() => {
         "page": page,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
         "total_pages": totalPages,
         "total_results": totalResults,
     };
@@ -54,27 +54,27 @@ class Result {
         this.voteCount,
     });
 
-    bool adult;
-    String backdropPath;
-    List<int> genreIds;
-    int id;
-    OriginalLanguage originalLanguage;
-    String originalTitle;
-    String overview;
-    double popularity;
-    String posterPath;
-    String releaseDate;
-    String title;
-    bool video;
-    double voteAverage;
-    int voteCount;
+    bool ?adult;
+    String ?backdropPath;
+    List<int> ?genreIds;
+    int? id;
+    OriginalLanguage ?originalLanguage;
+    String? originalTitle;
+    String? overview;
+    double? popularity;
+    String? posterPath;
+    String? releaseDate;
+    String? title;
+    bool? video;
+    double ?voteAverage;
+    int ?voteCount;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
-        originalLanguage: originalLanguageValues.map[json["original_language"]],
+        originalLanguage: originalLanguageValues.map![json["original_language"]],
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
@@ -89,7 +89,7 @@ class Result {
     Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
-        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+        "genre_ids": List<dynamic>.from(genreIds!.map((x) => x)),
         "id": id,
         "original_language": originalLanguageValues.reverse[originalLanguage],
         "original_title": originalTitle,
@@ -112,15 +112,15 @@ final originalLanguageValues = EnumValues({
 });
 
 class EnumValues<T> {
-    Map<String, T> map;
-    Map<T, String> reverseMap;
+    Map<String, T>? map;
+    Map<T, String>? reverseMap;
 
     EnumValues(this.map);
 
     Map<T, String> get reverse {
         if (reverseMap == null) {
-            reverseMap = map.map((k, v) => new MapEntry(v, k));
+            reverseMap = map!.map((k, v) => new MapEntry(v, k));
         }
-        return reverseMap;
+        return reverseMap!;
     }
 }

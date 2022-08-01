@@ -12,9 +12,9 @@ class PopularMoviePage extends StatefulWidget {
 }
 
 class _PopularMoviePageState extends State<PopularMoviePage> {
-  RandomColor randomColor;
+  RandomColor? randomColor;
   int pageNum = 1;
-  AppLifecycleState lifecycleState;
+  late AppLifecycleState lifecycleState;
   ScrollController scrollController = new ScrollController();
   PopularMovieController movieController = Get.put(PopularMovieController());
 
@@ -74,7 +74,7 @@ class _PopularMoviePageState extends State<PopularMoviePage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => DetailPage(
-                                filmUID: movieController.movieList[index].id,
+                                filmUID: movieController.movieList[index].id!,
                               ),
                             ),
                           );
@@ -105,7 +105,7 @@ class _PopularMoviePageState extends State<PopularMoviePage> {
                                         ? "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png"
                                         : Urls.imageUrl +
                                             movieController
-                                                .movieList[index].backdropPath,
+                                                .movieList[index].backdropPath!,
                                   ),
                                 ),
                               ),
@@ -113,7 +113,7 @@ class _PopularMoviePageState extends State<PopularMoviePage> {
                                 width: 120,
                                 height: 20,
                                 child: Text(
-                                  movieController.movieList[index].title,
+                                  movieController.movieList[index].title!,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 20,

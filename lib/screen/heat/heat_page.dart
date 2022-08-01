@@ -63,7 +63,7 @@ class _HeatPageState extends State<HeatPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DetailPage(
-                              filmUID: listItem[index].id,
+                              filmUID: listItem[index].id!,
                             ),
                           ),
                         );

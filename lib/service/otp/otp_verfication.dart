@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tmdb_movie_app/model/sms/otp_model.dart';
 
-class OtpVerficationService {
-  Future<OtpModel> forgotPasswordSendService() async {
+class OtpVerificationService {
+  Future<OtpModel?> forgotPasswordSendService() async {
     String otpUrl = "https://rest.nexmo.com/sms/json";
 
     try {
@@ -31,5 +31,6 @@ class OtpVerficationService {
     } catch (e) {
       print("Error OTP getdi : ${e.toString()}");
     }
+    return null;
   }
 }

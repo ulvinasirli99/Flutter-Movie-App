@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tmdb_movie_app/controller/text_controller.dart';
-import 'package:tmdb_movie_app/mixins/connectivy_controller.dart';
 import 'package:tmdb_movie_app/model/auth/auth_model.dart';
 import 'package:tmdb_movie_app/routes/naviagtion_routes.dart';
 import 'package:tmdb_movie_app/screen/auth/reset_pass.dart';
@@ -9,7 +9,6 @@ import 'package:tmdb_movie_app/screen/navigation/all_page_navigation.dart';
 import 'package:tmdb_movie_app/service/auth/auth_service.dart';
 import 'package:tmdb_movie_app/utils/validator.dart';
 import 'package:tmdb_movie_app/widgets/clip/login_shape.dart';
-import 'package:toast/toast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,9 +18,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> loginPageFormKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  SharedPreferences preferences;
-  AuthService authService;
-  AuthModel authModel;
+  late SharedPreferences preferences;
+  late AuthService authService;
+  late AuthModel ?authModel;
   String colorValueCheckUp = "";
   String userUID = "";
   String email = "";
@@ -99,11 +98,11 @@ class _LoginPageState extends State<LoginPage> {
                               autovalidateMode: AutovalidateMode.always,
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (value) {
-                                email = value;
+                                email = value!;
                               },
                               controller: loginEmailController,
                               validator: (email) {
-                                validateEmail(email);
+                                validateEmail(email!);
                                 colorValueCheckUp = email;
                                 return validateEmail(email);
                               },
@@ -135,10 +134,10 @@ class _LoginPageState extends State<LoginPage> {
                             child: TextFormField(
                               obscureText: obscureText,
                               onSaved: (value) {
-                                pass = value;
+                                pass = value!;
                               },
                               validator: (password) {
-                                return validatePasswordLength(password);
+                                return validatePasswordLength(password!);
                               },
                               controller: loginPasswordController,
                               decoration: InputDecoration(
@@ -205,14 +204,14 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              if (loginPageFormKey.currentState.validate()) {
-                                loginPageFormKey.currentState.save();
+                              if (loginPageFormKey.currentState!.validate()) {
+                                loginPageFormKey.currentState!.save();
                                 setState(() {
                                   callProgress = true;
                                 });
                                 preferences =
                                     await SharedPreferences.getInstance();
-                                int a = preferences.getInt("userUIDCodeValue");
+                                int a = preferences.getInt("userUIDCodeValue")!;
                                 getUserById(a.toString());
                               }
                             },
@@ -312,17 +311,16 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<AuthModel> getUserById(String id) async {
+  Future<AuthModel?> getUserById(String id) async {
     authModel = await authService.loginAuthentication(id);
-    if (pass == authModel.phone && email == authModel.email) {
-      Toast.show(
-        "Login Succusfluy",
-        context,
-        duration: 3,
-        textColor: Colors.white,
+    if (pass == authModel!.phone && email == authModel!.email) {
+      Fluttertoast.showToast(
+        msg: "Login Succusfluy",
+        toastLength: Toast.LENGTH_LONG,
+        textColor: Colors.teal,
         backgroundColor: Colors.black,
       );
-      print("Menim login olmagimi : ${authModel.email}");
+      print("My  login dto : ${authModel!.email}");
     }
     setState(() {
       callProgress = false;

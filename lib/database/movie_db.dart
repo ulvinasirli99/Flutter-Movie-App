@@ -4,13 +4,13 @@ import 'package:path/path.dart';
 import 'package:tmdb_movie_app/model/db/favorite_model.dart';
 
 class DatabaseProvider {
-  Database _db;
+  Database? _db;
 
   Future<Database> get db async {
     if (_db == null) {
       _db = await initializeDb();
     }
-    return _db;
+    return _db!;
   }
 
   Future<Database> initializeDb() async {

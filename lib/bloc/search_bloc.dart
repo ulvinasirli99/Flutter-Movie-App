@@ -9,9 +9,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   
   final ApiRepository repository;
   
-  SearchModel searchModel;
+  SearchModel? searchModel;
 
-  SearchBloc({@required this.repository}) : super(SearchEmpty());
+  SearchBloc({required this.repository}) : super(SearchEmpty());
 
   @override
 
@@ -25,7 +25,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
         searchModel = await repository.getAllMovieSearch(event.pageNum,event.movieName);
 
-        yield SearchLoaded(searchModel);
+        yield SearchLoaded(searchModel!);
 
       } catch (e) {
 

@@ -1,16 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 mixin DbException {
   void dbExcMessage(String dbMsg, BuildContext context) {
-    Toast.show(
-      dbMsg,
-      context,
-      duration: 2,
+    Fluttertoast.showToast(
+      msg: dbMsg,
+      toastLength: Toast.LENGTH_LONG,
       textColor: Colors.teal,
       backgroundColor: Colors.black,
-      backgroundRadius: 8,
     );
   }
 }

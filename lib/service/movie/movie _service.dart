@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class MovieService {
   //Todo Now PlayModel Service Hass Been Staterted..........
-  Future<List<Result>> getMovieResults(int pageNumber) async {
+  Future<List<Result>?> getMovieResults(int pageNumber) async {
     var resposne = await http
         .get(Uri.parse(Urls.nowPlayingUrl + "${pageNumber.toString()}"));
 
@@ -13,7 +13,7 @@ class MovieService {
       try {
         var data = jsonDecode(resposne.body);
 
-        List<Result> results = NowPlayingModel.fromJson(data).results;
+        List<Result> results = NowPlayingModel.fromJson(data).results!;
 
         return results;
       } catch (e) {
@@ -22,5 +22,6 @@ class MovieService {
     } else {
       print("Movie No Play Error : ${resposne.statusCode}");
     }
+    return null;
   }
 }

@@ -4,9 +4,9 @@ import 'package:tmdb_movie_app/provider/movie/cSS_provider.dart';
 import 'package:tmdb_movie_app/widgets/detail/photos.dart';
 
 class MoviePhotosList extends StatefulWidget {
-  final int filmID;
+  final int? filmID;
 
-  const MoviePhotosList({Key key, this.filmID}) : super(key: key);
+  const MoviePhotosList({Key? key, this.filmID}) : super(key: key);
 
   @override
   _MoviePhotosListState createState() => _MoviePhotosListState();
@@ -18,7 +18,7 @@ class _MoviePhotosListState extends State<MoviePhotosList> {
     // TODO: implement initState
     super.initState();
     var castItems = Provider.of<CastServiceProvider>(context, listen: false);
-    castItems.getCasts(widget.filmID);
+    castItems.getCasts(widget.filmID!);
   }
 
   @override
@@ -37,7 +37,7 @@ class _MoviePhotosListState extends State<MoviePhotosList> {
             itemCount: 10,
             itemBuilder: (context, index) {
               return MoviePhotoWidget(
-                imgUrl: castItem.castModel.cast[index].profilePath,
+                imgUrl: castItem.castModel!.cast![index].profilePath!,
               );
             },
           );

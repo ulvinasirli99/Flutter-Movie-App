@@ -4,7 +4,7 @@ import 'package:tmdb_movie_app/screen/auth/login.dart';
 
 mixin LogoutMix {
   
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
   
   void logoutAccount(BuildContext context) async {
   

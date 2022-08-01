@@ -27,11 +27,11 @@ class SearchLoaded extends SearchState {
 
 class SearchError extends SearchState {
  
-  final String errMsg;
+  final String? errMsg;
  
   SearchError({@required this.errMsg});
  
   @override
-  List<Object> get props => [errMsg];
+  List<Object> get props => [errMsg!];
 
 }

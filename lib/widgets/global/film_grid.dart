@@ -7,8 +7,8 @@ class GridFilmWidget extends StatelessWidget {
   final List<Result> resultList;
 
   const GridFilmWidget({
-    Key key,
-    @required this.resultList,
+    Key? key,
+    required this.resultList,
   }) : super(key: key);
 
   @override
@@ -53,7 +53,7 @@ class GridFilmWidget extends StatelessWidget {
                     placeholder: "assets/loading.gif",
                     image: resultList[index].backdropPath == null
                         ? "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png"
-                        : Urls.imageUrl + resultList[index].backdropPath,
+                        : Urls.imageUrl + resultList[index].backdropPath!,
                   ),
                 ),
               ),
@@ -61,7 +61,7 @@ class GridFilmWidget extends StatelessWidget {
                 width: 120,
                 height: 20,
                 child: Text(
-                  resultList[index].title,
+                  resultList[index].title!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,

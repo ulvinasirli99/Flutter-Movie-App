@@ -4,9 +4,9 @@ import 'package:tmdb_movie_app/provider/movie/cSS_provider.dart';
 import 'package:tmdb_movie_app/widgets/detail/writes_widget.dart';
 
 class WritesWidgetList extends StatefulWidget {
-  final int id;
+  final int? id;
 
-  const WritesWidgetList({Key key, this.id}) : super(key: key);
+  const WritesWidgetList({Key? key, this.id}) : super(key: key);
   @override
   _WritesWidgetListState createState() => _WritesWidgetListState();
 }
@@ -17,7 +17,7 @@ class _WritesWidgetListState extends State<WritesWidgetList> {
     // TODO: implement initState
     super.initState();
     var castItems = Provider.of<CastServiceProvider>(context, listen: false);
-    castItems.getCasts(widget.id);
+    castItems.getCasts(widget.id!);
   }
 
   @override
@@ -32,11 +32,11 @@ class _WritesWidgetListState extends State<WritesWidgetList> {
             ),
           )
         : ListView.builder(
-            itemCount: writesItem.castModel.crew.length,
+            itemCount: writesItem.castModel!.crew!.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return WritesWidget(
-                writesName: writesItem.castModel.crew[index].name,
+                writesName: writesItem.castModel!.crew![index].name!,
               );
             },
           );

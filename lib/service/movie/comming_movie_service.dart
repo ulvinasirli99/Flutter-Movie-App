@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class CommingMovieService {
  
   //Todo Comming Soon Service Has Been Started...........
-  Future<List<Result>> getCommingMovieResults(int pageNum) async {
+  Future<List<Result>?> getCommingMovieResults(int pageNum) async {
  
     var response = await http.get(Uri.parse(
  
@@ -18,9 +18,9 @@ class CommingMovieService {
  
         var dataModel = jsonDecode(response.body);
 
-        List<Result> dataResults = ComingSoonModel.fromJson(dataModel).results;
+        List<Result>? dataResults = ComingSoonModel.fromJson(dataModel).results;
  
-        return dataResults;
+        return dataResults!;
  
       } catch (e) {
  

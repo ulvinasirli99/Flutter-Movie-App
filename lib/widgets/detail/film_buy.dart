@@ -13,14 +13,13 @@ class _BuyFilmWidgetState extends State<BuyFilmWidget> {
   Random random = new Random();
   String toSal = "";
   String salaryV() {
-    double filmSalary =
+    double? filmSalary =
         moviePaidRandomGenerator(random.nextInt(random.nextInt(220)));
     return filmSalary.toString();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     toSal = salaryV();
   }

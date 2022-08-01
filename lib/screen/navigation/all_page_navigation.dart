@@ -12,7 +12,7 @@ class AllPagesNavigation extends StatefulWidget {
 class _AllPagesNavigationState extends State<AllPagesNavigation>
     with ConnectivyMixin {
   int bottomItemIndex = 0;
-  List<Widget> _pages;
+  List<Widget>? _pages;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _AllPagesNavigationState extends State<AllPagesNavigation>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[bottomItemIndex],
+      body: _pages![bottomItemIndex],
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -47,12 +47,13 @@ class _AllPagesNavigationState extends State<AllPagesNavigation>
               label: "Films",
             ),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.restore,
-                  size: 35,
-                  color: Colors.black,
-                ),
-                label: "Min"),
+              icon: Icon(
+                Icons.restore,
+                size: 35,
+                color: Colors.black,
+              ),
+              label: "Min",
+            ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,

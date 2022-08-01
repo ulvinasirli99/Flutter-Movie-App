@@ -4,7 +4,7 @@ import 'package:tmdb_movie_app/model/movie/heat_model.dart';
 
 class HeatService {
  
-  Future<List<Result>> heatMovieItems(int pageNum) async {
+  Future<List<Result>?> heatMovieItems(int pageNum) async {
  
     String url =
 
@@ -18,7 +18,7 @@ class HeatService {
 
       print("Heat Service Status code : ${req.statusCode}");
 
-      List<Result> resResult = HeatModel.fromJson(json).results;
+      List<Result>? resResult = HeatModel.fromJson(json).results;
 
       return resResult;
 

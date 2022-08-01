@@ -17,11 +17,11 @@ class ReviewModel {
         this.totalResults,
     });
 
-    int id;
-    int page;
-    List<Result> results;
-    int totalPages;
-    int totalResults;
+    int ?id;
+    int ?page;
+    List<Result>? results;
+    int ?totalPages;
+    int? totalResults;
 
     factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
         id: json["id"],
@@ -34,7 +34,7 @@ class ReviewModel {
     Map<String, dynamic> toJson() => {
         "id": id,
         "page": page,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
         "total_pages": totalPages,
         "total_results": totalResults,
     };
@@ -51,13 +51,13 @@ class Result {
         this.url,
     });
 
-    String author;
-    AuthorDetails authorDetails;
-    String content;
-    DateTime createdAt;
-    String id;
-    DateTime updatedAt;
-    String url;
+    String ?author;
+    AuthorDetails ?authorDetails;
+    String ?content;
+    DateTime ?createdAt;
+    String ?id;
+    DateTime ?updatedAt;
+    String? url;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         author: json["author"],
@@ -71,11 +71,11 @@ class Result {
 
     Map<String, dynamic> toJson() => {
         "author": author,
-        "author_details": authorDetails.toJson(),
+        "author_details": authorDetails!.toJson(),
         "content": content,
-        "created_at": createdAt.toIso8601String(),
+        "created_at": createdAt!.toIso8601String(),
         "id": id,
-        "updated_at": updatedAt.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
         "url": url,
     };
 }
@@ -88,10 +88,10 @@ class AuthorDetails {
         this.rating,
     });
 
-    String name;
-    String username;
-    String avatarPath;
-    double rating;
+    String ?name;
+    String ?username;
+    String ?avatarPath;
+    double ?rating;
 
     factory AuthorDetails.fromJson(Map<String, dynamic> json) => AuthorDetails(
         name: json["name"],

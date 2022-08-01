@@ -11,6 +11,5 @@ class FetchSearchMovie extends SearchEvent {
   FetchSearchMovie(this.pageNum, this.movieName);
   
   @override
-  // TODO: implement props
   List<Object> get props => [pageNum,movieName];
 }

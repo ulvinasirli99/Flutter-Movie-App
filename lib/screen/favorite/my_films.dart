@@ -9,10 +9,10 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  List<FavoriteModel> favs = [];
+  List<dynamic> favs = [];
 
 //Todo Bunu bir class da yazib daha sonra classi initiliaze etmek lazimdir.....
-  Future<List<FavoriteModel>> futureFavoriteMovies() async {
+  Future<List<dynamic>> futureFavoriteMovies() async {
     var db = DatabaseProvider();
     await db.allFavoriteMovies().then((moviesElement) {
       favs = moviesElement;
@@ -22,7 +22,6 @@ class _FavoritePageState extends State<FavoritePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     futureFavoriteMovies();
     print(favs);
@@ -31,7 +30,7 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<FavoriteModel>>(
+      body: FutureBuilder<List<dynamic>>(
         future: futureFavoriteMovies(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -39,7 +38,7 @@ class _FavoritePageState extends State<FavoritePage> {
               child: CircularProgressIndicator(),
             );
           }
-          if (snapshot.data.length == 0) {
+          if (snapshot.data!.length == 0) {
             return Center(
               child: Text(
                 "No You isn't favorite movies",
@@ -50,7 +49,7 @@ class _FavoritePageState extends State<FavoritePage> {
               ),
             );
           }
-          if (snapshot.data.length == null) {
+          if (snapshot.data!.length == null) {
             return Center(
               child: Text(
                 "You isn't favorite movies",
@@ -62,19 +61,19 @@ class _FavoritePageState extends State<FavoritePage> {
             );
           }
           return ListView.builder(
-            itemCount: snapshot.data.length,
+            itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              String movieImage = snapshot.data[index].movieImage == null
+              String movieImage = snapshot.data![index].movieImage == null
                   ? "http://filmcasting.az/uploads/202006000635.jpg"
-                  : "${Urls.imageUrl}${snapshot.data[index].movieImage}";
-              final item = snapshot.data[index];
+                  : "${Urls.imageUrl}${snapshot.data![index].movieImage}";
+              final item = snapshot.data![index];
               return Dismissible(
                 background: Container(color: Colors.teal.shade300),
                 key: UniqueKey(),
                 child: ListTile(
                   contentPadding: EdgeInsets.all(12),
                   title: Text(
-                    snapshot.data[index].movieName,
+                    snapshot.data![index].movieName!,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -88,7 +87,7 @@ class _FavoritePageState extends State<FavoritePage> {
                       top: 10,
                     ),
                     child: Text(
-                      snapshot.data[index].movieType,
+                      snapshot.data![index].movieType!,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -123,7 +122,7 @@ class _FavoritePageState extends State<FavoritePage> {
     );
   }
   void deleteMovieItem(
-      AsyncSnapshot<List<FavoriteModel>> snapshot, int index) async {
-    await DatabaseProvider().delete(snapshot.data[index].movieID);
+      AsyncSnapshot<List<dynamic>> snapshot, int index) async {
+    await DatabaseProvider().delete(snapshot.data![index].movieID!);
   }
 }

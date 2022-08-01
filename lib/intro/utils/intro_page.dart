@@ -4,7 +4,7 @@ import 'package:tmdb_movie_app/intro/utils/route.dart';
 import 'package:tmdb_movie_app/model/intro/page_data.dart';
 
 class OnboardingScreen extends StatelessWidget {
-  List<Color> get colors => pages.map((p) => p.bgColor).toList();
+  List<Color?> get colors => pages!.map((p) => p.bgColor).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class OnboardingScreen extends StatelessWidget {
             Colors.red,
           ],
           itemCount: 1, // null = infinity
-          itemBuilder: (int index, double value) {
+          itemBuilder: (int index) {
             return Container(
               child: RouteExample(),
             );

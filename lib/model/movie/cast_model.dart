@@ -15,9 +15,9 @@ class CastModel {
         this.crew,
     });
 
-    int id;
-    List<Cast> cast;
-    List<Cast> crew;
+    int ?id;
+    List<Cast> ?cast;
+    List<Cast>? crew;
 
     factory CastModel.fromJson(Map<String, dynamic> json) => CastModel(
         id: json["id"],
@@ -27,8 +27,8 @@ class CastModel {
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "cast": List<dynamic>.from(cast.map((x) => x.toJson())),
-        "crew": List<dynamic>.from(crew.map((x) => x.toJson())),
+        "cast": List<dynamic>.from(cast!.map((x) => x.toJson())),
+        "crew": List<dynamic>.from(crew!.map((x) => x.toJson())),
     };
 }
 
@@ -50,20 +50,20 @@ class Cast {
         this.job,
     });
 
-    bool adult;
-    int gender;
-    int id;
-    String knownForDepartment;
-    String name;
-    String originalName;
-    double popularity;
-    String profilePath;
-    int castId;
-    String character;
-    String creditId;
-    int order;
-    String department;
-    String job;
+    bool? adult;
+    int ?gender;
+    int? id;
+    String ?knownForDepartment;
+    String ?name;
+    String ?originalName;
+    double ?popularity;
+    String ?profilePath;
+    int ?castId;
+    String ?character;
+    String? creditId;
+    int ?order;
+    String ?department;
+    String ?job;
 
     factory Cast.fromJson(Map<String, dynamic> json) => Cast(
         adult: json["adult"],

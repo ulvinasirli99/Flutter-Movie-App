@@ -49,10 +49,10 @@ class _NowShowListFilmWidgetState extends State<NowShowListFilmWidget> {
             )
           : ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: listMovieItem.resultList.length + 1,
+              itemCount: listMovieItem.resultList!.length + 1,
               controller: scrollController,
               itemBuilder: (context, index) {
-                if (index == listMovieItem.resultList.length) {
+                if (index == listMovieItem.resultList!.length) {
                   return Center(
                     child: SizedBox(
                       child: Center(child: CircularProgressIndicator()),
@@ -67,7 +67,7 @@ class _NowShowListFilmWidgetState extends State<NowShowListFilmWidget> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DetailPage(
-                          filmUID: listMovieItem.resultList[index].id,
+                          filmUID: listMovieItem.resultList![index].id!,
                         ),
                       ),
                     );
@@ -84,7 +84,7 @@ class _NowShowListFilmWidgetState extends State<NowShowListFilmWidget> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: FadeInImage.assetNetwork(
-                                image: "${Urls.imageUrl}${listMovieItem.resultList[index].posterPath}",
+                                image: "${Urls.imageUrl}${listMovieItem.resultList![index].posterPath}",
                                 placeholder: "assets/loading.gif",
                                 fit: BoxFit.cover,
                               ),
@@ -96,7 +96,7 @@ class _NowShowListFilmWidgetState extends State<NowShowListFilmWidget> {
                           child: Container(
                             width: 110,
                             child: Text(
-                              listMovieItem.resultList[index].title,
+                              listMovieItem.resultList![index].title!,
                               overflow: TextOverflow.fade,
                               maxLines: 1,
                               softWrap: false,

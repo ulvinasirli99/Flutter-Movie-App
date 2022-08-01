@@ -14,8 +14,8 @@ class VideolModel {
         this.results,
     });
 
-    int id;
-    List<Result> results;
+    int ?id;
+    List<Result>? results;
 
     factory VideolModel.fromJson(Map<String, dynamic> json) => VideolModel(
         id: json["id"],
@@ -24,7 +24,7 @@ class VideolModel {
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
     };
 }
 
@@ -40,14 +40,14 @@ class Result {
         this.type,
     });
 
-    String id;
-    String iso6391;
-    String iso31661;
-    String key;
-    String name;
-    String site;
-    int size;
-    String type;
+    String ?id;
+    String ?iso6391;
+    String ?iso31661;
+    String ?key;
+    String ?name;
+    String ?site;
+    int ?size;
+    String ?type;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],

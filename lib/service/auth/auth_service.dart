@@ -3,12 +3,12 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tmdb_movie_app/model/auth/auth_model.dart';
 
-SharedPreferences preferences;
+late SharedPreferences preferences;
 
 class AuthService {
  
   //Todo Authentication Register
-  Future<AuthModel> registerAuthentication(
+  Future<AuthModel?> registerAuthentication(
  
       String name, String email, String pass) async {
  
@@ -66,11 +66,12 @@ class AuthService {
       print(e.toString());
  
     }
+    return null;
  
   }
 
   //Todo Authentication Login
-  Future<AuthModel> loginAuthentication(String id) async {
+  Future<AuthModel?> loginAuthentication(String id) async {
  
     String requrl = "https://www.fluttermovie.top/api/Users/${id}";
 
@@ -101,6 +102,7 @@ class AuthService {
       print(e.toString());
     
     }
+    return null;
  
   }
 

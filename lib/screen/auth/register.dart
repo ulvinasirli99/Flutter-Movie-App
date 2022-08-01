@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tmdb_movie_app/controller/text_controller.dart';
 import 'package:tmdb_movie_app/model/auth/auth_model.dart';
@@ -7,7 +8,6 @@ import 'package:tmdb_movie_app/screen/navigation/all_page_navigation.dart';
 import 'package:tmdb_movie_app/service/auth/auth_service.dart';
 import 'package:tmdb_movie_app/utils/validator.dart';
 import 'package:tmdb_movie_app/widgets/clip/register_shape.dart';
-import 'package:toast/toast.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -17,9 +17,9 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> registerPageFormKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
-  SharedPreferences preferences;
-  AuthService authService;
-  AuthModel authModel;
+  late SharedPreferences preferences;
+  late AuthService authService;
+  late AuthModel? authModel;
   String name = "";
   String email = "";
   String pass = "";
@@ -28,7 +28,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     authModel = new AuthModel();
     authService = new AuthService();
@@ -95,10 +94,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: registerNameController,
                             autovalidateMode: AutovalidateMode.always,
                             validator: (name) {
-                              return validateName(name);
+                              return validateName(name!);
                             },
                             onSaved: (value) {
-                              name = value;
+                              name = value!;
                             },
                             decoration: InputDecoration(
                               prefixIcon: Icon(
@@ -124,10 +123,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: registerEmailController,
                             autovalidateMode: AutovalidateMode.always,
                             validator: (email) {
-                              return validateEmail(email);
+                              return validateEmail(email!);
                             },
                             onSaved: (value) {
-                              email = value;
+                              email = value!;
                             },
                             decoration: InputDecoration(
                               prefixIcon: Icon(
@@ -153,10 +152,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: registerPassWordController,
                             autovalidateMode: AutovalidateMode.always,
                             validator: (pass) {
-                              return validatePasswordLength(pass);
+                              return validatePasswordLength(pass!);
                             },
                             onSaved: (value) {
-                              pass = value;
+                              pass = value!;
                             },
                             decoration: InputDecoration(
                               suffixIcon: IconButton(
@@ -196,8 +195,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            if (registerPageFormKey.currentState.validate()) {
-                              registerPageFormKey.currentState.save();
+                            if (registerPageFormKey.currentState!.validate()) {
+                              registerPageFormKey.currentState!.save();
                               preferences =
                                   await SharedPreferences.getInstance();
                               setState(() {
@@ -212,11 +211,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               preferences.setString("ad", name);
                               preferences.setString("posta", email);
                               preferences.setString("parol", pass);
-                              Toast.show(
-                                "Register Succusfluy",
-                                context,
-                                duration: 3,
-                                textColor: Colors.white,
+                              Fluttertoast.showToast(
+                                msg: "Register Succusfluy",
+                                toastLength: Toast.LENGTH_LONG,
+                                textColor: Colors.teal,
                                 backgroundColor: Colors.black,
                               );
                               setState(() {

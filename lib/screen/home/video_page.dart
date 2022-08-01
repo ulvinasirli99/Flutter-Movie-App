@@ -6,7 +6,7 @@ import 'package:tmdb_movie_app/widgets/video/custom_video.dart';
 class VideoPage extends StatefulWidget {
   final int filmID;
   final String movieIMGUrl;
-  VideoPage({Key key, @required this.filmID, @required this.movieIMGUrl})
+  VideoPage({Key? key, required this.filmID, required this.movieIMGUrl})
       : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class VideoPage extends StatefulWidget {
 
 class _VideoPageState extends State<VideoPage> {
   VideService videService = new VideService();
-  Future<VideolModel> futureVideoModel;
+  late Future<VideolModel?> futureVideoModel;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _VideoPageState extends State<VideoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green.shade200,
-      body: FutureBuilder<VideolModel>(
+      body: FutureBuilder<VideolModel?>(
         future: futureVideoModel,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -41,9 +41,9 @@ class _VideoPageState extends State<VideoPage> {
             );
           }
           return CustomVideowidget(
-            videoUrl: "${snapshot.data.results[0].key}",
+            videoUrl: "${snapshot.data!.results![0].key}",
             // "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-            filmName: snapshot.data.results[0].name,
+            filmName: snapshot.data!.results![0].name!,
             moviIMGUrl: widget.movieIMGUrl,
           );
         },

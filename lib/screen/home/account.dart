@@ -14,7 +14,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> with LogoutMix {
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
   int uid = 0;
   String id = "";
   String email = "";
@@ -22,16 +22,15 @@ class _AccountPageState extends State<AccountPage> with LogoutMix {
 
   Future<void> userDetailFromMemeory() async {
     sharedPreferences = await SharedPreferences.getInstance();
-    uid = sharedPreferences.getInt("userUIDCodeValue");
+    uid = sharedPreferences.getInt("userUIDCodeValue")!;
     id = uid.toString();
-    email = sharedPreferences.getString("posta");
-    username = sharedPreferences.getString("ad");
+    email = sharedPreferences.getString("posta")!;
+    username = sharedPreferences.getString("ad")!;
     setState(() {});
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     userDetailFromMemeory();
   }
@@ -87,7 +86,7 @@ class _AccountPageState extends State<AccountPage> with LogoutMix {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Text(
-                        id ?? "null",
+                        id,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -117,7 +116,7 @@ class _AccountPageState extends State<AccountPage> with LogoutMix {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Text(
-                        email ?? "null",
+                        email,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -147,7 +146,7 @@ class _AccountPageState extends State<AccountPage> with LogoutMix {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Text(
-                        username ?? "null",
+                        username,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

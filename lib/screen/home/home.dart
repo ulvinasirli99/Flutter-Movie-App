@@ -18,7 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  SharedPreferences preferences;
+  late SharedPreferences preferences;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

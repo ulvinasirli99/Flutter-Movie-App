@@ -37,7 +37,7 @@ class Page2 extends StatelessWidget {
               children: [
                 Expanded(
                   child: PageCard(
-                    page: pages[1],
+                    page: pages![1],
                   ),
                 ),
               ],

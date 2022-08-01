@@ -1,11 +1,11 @@
 import 'package:tmdb_movie_app/global/constants/db_texts.dart';
 
 class FavoriteModel {
-  int id;
-  int movieID;
-  String movieName;
-  String movieImage;
-  String movieType;
+  int? id;
+  int? movieID;
+  String? movieName;
+  String? movieImage;
+  String? movieType;
   //Todo Database Model Conustructor
   FavoriteModel({
     this.movieID,

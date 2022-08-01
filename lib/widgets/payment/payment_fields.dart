@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PaymentCardDetailtField extends StatelessWidget {
-  final String cardText;
+  final String? cardText;
 
-  PaymentCardDetailtField({Key key, this.cardText}) : super(key: key);
+  PaymentCardDetailtField({Key? key, this.cardText}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

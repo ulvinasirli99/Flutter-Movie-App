@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tmdb_movie_app/screen/heat/heat_page.dart';
 
 class Age18Disclamer extends StatelessWidget {
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
   @override
   Widget build(BuildContext context) {
     return Dialog(

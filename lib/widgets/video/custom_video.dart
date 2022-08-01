@@ -8,10 +8,10 @@ class CustomVideowidget extends StatefulWidget {
   final String moviIMGUrl;
 
   const CustomVideowidget({
-    Key key,
-    @required this.videoUrl,
-    @required this.filmName,
-    @required this.moviIMGUrl,
+    Key? key,
+    required this.videoUrl,
+    required this.filmName,
+    required this.moviIMGUrl,
   }) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class CustomVideowidget extends StatefulWidget {
 }
 
 class _CustomVideowidgetState extends State<CustomVideowidget> {
-  YoutubePlayerController youtubePlayerController;
+  late YoutubePlayerController youtubePlayerController;
 
   void playTubePlayer() {
     youtubePlayerController = YoutubePlayerController(

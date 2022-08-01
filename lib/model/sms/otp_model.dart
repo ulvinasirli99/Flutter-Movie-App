@@ -1,6 +1,6 @@
 class OtpModel {
-  String messageCount;
-  List<Messages> messages;
+  String? messageCount;
+  List<Messages> ?messages;
 
   OtpModel({this.messageCount, this.messages});
 
@@ -9,7 +9,7 @@ class OtpModel {
     if (json['messages'] != null) {
       messages = new List<Messages>.empty(growable: true);
       json['messages'].forEach((v) {
-        messages.add(new Messages.fromJson(v));
+        messages?.add(new Messages.fromJson(v));
       });
     }
   }
@@ -18,19 +18,19 @@ class OtpModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message-count'] = this.messageCount;
     if (this.messages != null) {
-      data['messages'] = this.messages.map((v) => v.toJson()).toList();
+      data['messages'] = this.messages?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Messages {
-  String to;
-  String messageId;
-  String status;
-  String remainingBalance;
-  String messagePrice;
-  String network;
+  String?to;
+  String?messageId;
+  String?status;
+  String?remainingBalance;
+  String?messagePrice;
+  String?network;
 
   Messages(
       {this.to,

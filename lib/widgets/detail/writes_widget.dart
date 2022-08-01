@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:random_color/random_color.dart';
 
 class WritesWidget extends StatelessWidget {
-  final String writesName;
+  final String? writesName;
 
-  WritesWidget({Key key, this.writesName}) : super(key: key);
+  WritesWidget({Key? key, this.writesName}) : super(key: key);
 
   RandomColor _randomColor = RandomColor();
 
@@ -22,7 +22,7 @@ class WritesWidget extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          writesName,
+          writesName!,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 18,

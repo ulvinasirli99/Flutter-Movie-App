@@ -9,7 +9,7 @@ class AuthSession extends StatefulWidget {
 }
 
 class _AuthSessionState extends State<AuthSession> {
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
 
   Future authSession() async {
     sharedPreferences = await SharedPreferences.getInstance();
@@ -24,7 +24,6 @@ class _AuthSessionState extends State<AuthSession> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     authSession();
   }

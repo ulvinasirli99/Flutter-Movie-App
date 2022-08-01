@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class SearchService {
   //Todo Search Service Hass Been Staterted..........
 
-  Future<SearchModel> searchMovieResult(int pageNum, String movieName) async {
+  Future<SearchModel?> searchMovieResult(int pageNum, String movieName) async {
     var response = await http.get(
       Uri.parse(
           "https://api.themoviedb.org/3/search/movie?api_key=82842c1d4249ecbe2d8ee39d7cb524c3&language=en-US&query=$movieName&page=$pageNum"),

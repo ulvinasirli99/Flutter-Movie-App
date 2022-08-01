@@ -16,7 +16,6 @@ class _CommingListFilmWidgetState extends State<CommingListFilmWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     var commingInitialData =
         Provider.of<CServiceProvider>(context, listen: false);
@@ -52,10 +51,10 @@ class _CommingListFilmWidgetState extends State<CommingListFilmWidget> {
             )
           : ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: listMovieItem.cResultList.length + 1,
+              itemCount: listMovieItem.cResultList!.length + 1,
               controller: scrollController,
               itemBuilder: (context, index) {
-                if (index == listMovieItem.cResultList.length) {
+                if (index == listMovieItem.cResultList!.length) {
                   return Center(
                     child: SizedBox(
                       child: Center(child: CircularProgressIndicator()),
@@ -70,7 +69,7 @@ class _CommingListFilmWidgetState extends State<CommingListFilmWidget> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DetailPage(
-                          filmUID: listMovieItem.cResultList[index].id,
+                          filmUID: listMovieItem.cResultList![index].id!,
                         ),
                       ),
                     );
@@ -88,7 +87,7 @@ class _CommingListFilmWidgetState extends State<CommingListFilmWidget> {
                               borderRadius: BorderRadius.circular(8),
                               child: FadeInImage.assetNetwork(
                                 image:
-                                    "${Urls.imageUrl}${listMovieItem.cResultList[index].posterPath}",
+                                    "${Urls.imageUrl}${listMovieItem.cResultList![index].posterPath}",
                                 placeholder: "assets/loading.gif",
                                 fit: BoxFit.cover,
                               ),
@@ -100,7 +99,7 @@ class _CommingListFilmWidgetState extends State<CommingListFilmWidget> {
                           child: Container(
                             width: 110,
                             child: Text(
-                              listMovieItem.cResultList[index].title,
+                              listMovieItem.cResultList![index].title!,
                               overflow: TextOverflow.fade,
                               maxLines: 1,
                               softWrap: false,

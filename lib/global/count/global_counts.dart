@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_movie_app/model/movie/detail_model.dart';
 
-double ratingCount(AsyncSnapshot<DetailModel> snapshot) {
+double? ratingCount(AsyncSnapshot<DetailModel?> snapshot) {
 
-  if (snapshot.data.voteAverage > 0 && snapshot.data.voteAverage <= 2) {
+  if (snapshot.data!.voteAverage! > 0 && snapshot.data!.voteAverage! <= 2) {
     
     return 1.0;
 
-  }else if(snapshot.data.voteAverage > 2 && snapshot.data.voteAverage <= 4){
+  }else if(snapshot.data!.voteAverage! > 2 && snapshot.data!.voteAverage! <= 4){
 
     return 2.0;
 
-  }else if(snapshot.data.voteAverage > 4 && snapshot.data.voteAverage <= 6){
+  }else if(snapshot.data!.voteAverage! > 4 && snapshot.data!.voteAverage! <= 6){
 
     return 3.0;
     
-  }else if(snapshot.data.voteAverage > 6 && snapshot.data.voteAverage <= 8){
+  }else if(snapshot.data!.voteAverage! > 6 && snapshot.data!.voteAverage! <= 8){
 
     return 4.0;
     
-  }else if(snapshot.data.voteAverage > 8 && snapshot.data.voteAverage <= 10){
+  }else if(snapshot.data!.voteAverage! > 8 && snapshot.data!.voteAverage! <= 10){
 
     return 5.0;
     
   }
+
+  return 0.0;
 
 }
 
